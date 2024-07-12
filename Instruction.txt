@@ -1,0 +1,7 @@
+Email: zaiomenyfanampimahafaly@gmail.com
+mdp : admin123
+
+Requises
+
+-WampServer 3.2.0 (php 7.3.12,Apache 2.4.41 ,mariaDB 10.4.10,SQL 8.0.18)
+-Une base de donnée nommée "menage" puis y importer l' instruction SQL "menage.sql" et l'exécuter.  

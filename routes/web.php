@@ -1,5 +1,8 @@
 <?php
-
+use App\Http\Controllers\CMenageController;
+use App\Http\Controllers\DescendentController;
+use App\Http\Controllers\CotisationController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 //auth route for both 
@@ -31,5 +34,16 @@ Route::group(['middleware' => ['auth', 'role:user']], function() {
 Route::group(['middleware' => ['auth', 'role:blogwriter']], function() { 
     Route::get('/dashboard/postcreate', 'App\Http\Controllers\DashboardController@postcreate')->name('dashboard.postcreate');
 });
+Route::resource('/ChefM',CMenageController::class);
+Route::post('/ChefM/chercher',[CMenageController::class,'chercher'])->name('ChefM.chercher');
+Route::resource('Cotisation',CotisationController::class);
+Route::post('/ChefM/modifier',[CMenageController::class,'modifier'])->name('ChefM.modifier');
+Route::get('/Liste/{id}',[CMenageController::class,'liste'])->name('Liste');
+Route::resource('/Descendent',DescendentController::class);
+Route::resource('Notification',NotificationController::class);
+Route::post('/Descendent/modifier',[DescendentController::class,'modifier'])->name('Descendent.modifier');
+Route::get('descendants/majeur',[DescendentController::class,'dmajeur'])->name('descendent.dmajeur');
 
+
+Route::post('chef/cotisation',[CotisationController::class,'chercher'])->name('chef_cotisation.chercher');
 require __DIR__.'/auth.php';
